@@ -14,5 +14,7 @@
             "zho\\L5Article": "src"
         }
     },
-    "require": {}
+    "require": {
+        "illuminate/html": "v5.0.0"
+    }
 }

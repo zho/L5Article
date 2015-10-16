@@ -4,6 +4,7 @@ namespace zho\L5Article\Http;
 
 
 use App\Http\Controllers\Controller;
+use zho\L5Article\Http\Requests\CreateArticleRequest;
 use zho\L5Article\models\Article;
 
 class L5ArticleController extends Controller {
@@ -12,19 +13,23 @@ class L5ArticleController extends Controller {
 
 		$articleList = Article::all();
 
-		return view("articlelist", ["articlelist" => $articleList]);
+		return view("l5article::articlelist", ["articlelist" => $articleList]);
 	}
 
 	public function ArticleDetail($id) {
-		// todo
+		$articledetail = Article::findOrFail($id);
+
+		return view("l5article::articledetail", ["articledetail" => $articledetail]);
 	}
 
 	public function AddArticle() {
-		// todo
+		return view("l5article::articleadd");
 	}
 
-	public function SaveArticle() {
-		// todo
+	public function SaveArticle(CreateArticleRequest $request) {
+		Article::create($request->all());
+
+		return redirect("article");
 	}
 
 	public function EditArticle($id) {
