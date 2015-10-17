@@ -16,6 +16,12 @@ class L5ArticleController extends Controller {
 		return view("l5article::articlelist", ["articlelist" => $articleList]);
 	}
 
+	public function AdminArticle() {
+		$articleList = Article::all();
+
+		return view("l5article::articleadmin", ["articlelist" => $articleList]);
+	}
+
 	public function ArticleDetail($id) {
 		$articledetail = Article::findOrFail($id);
 
@@ -33,14 +39,26 @@ class L5ArticleController extends Controller {
 	}
 
 	public function EditArticle($id) {
-		// todo
+		$record = Article::findOrFail($id);
+
+		return view("l5article::articleedit", ["record" => $record]);
 	}
 
-	public function UpdateArticle($id) {
-		// todo
+	public function UpdateArticle($id, CreateArticleRequest $request) {
+		$record = Article::find($id);
+
+		$record->title = $request->title;
+		$record->teaser = $request->teaser;
+		$record->body = $request->body;
+
+		$record->save();
+
+		return redirect("article");
 	}
 
 	public function DeleteArticle($id) {
-		// todo
+		Article::destroy($id);
+
+		return redirect("article");
 	}
 }
