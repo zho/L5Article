@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "zho\\L5Article": "src"
+            "zho\\L5Article\\": "src"
         }
     },
     "require": {
